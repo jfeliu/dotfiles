@@ -1,20 +1,34 @@
-" Indentation settings
-set tabstop=4
-set shiftwidth=4
-set expandtab
+set number
 
-" Encoding
-set enc=utf-8
+set nocompatible
 
-" For colour highlights
-syntax on
+" Pathogen
+execute pathogen#infect()
+call pathogen#helptags() " generate helptags for everything in 'runtimepath'
+syntax enable
+set t_Co=256
+set background=dark
+colorscheme solarized
+filetype plugin indent on
 
-filetype indent plugin on
+au BufNewFile,BufRead *.py
+    \ highlight OverLength ctermbg=red ctermfg=white guibg=#592929 |
+    \ match OverLength /\%80v.\+/ |
+    \ set tabstop=4 |
+    \ set expandtab |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set fileformat=unix |
 
-augroup vimrc_autocmds
-    autocmd!
-    " highlight characters past column 80
-    autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
-    autocmd FileType python match Excess /\%80v.*/
-    autocmd FileType python set wrap
-augroup END
+au BufNewFile,BufRead *.js,*.html,*.css,*.sql,*.json
+    \ set tabstop=2 |
+    \ set expandtab |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
+
+au BufNewFile,BufRead *.sh,*.yaml,*.yml
+    \ set tabstop=4 |
+    \ set expandtab |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set fileformat=unix |
